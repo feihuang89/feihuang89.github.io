@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+     **
+     * Author:         掌心
+     * Contact:        zhanxin.info@gmail.com
+     * Theme Name:     Violet ( Violet 主题代表着一种颜色，一种情感，还有一种美)
+     * Create Date:    2013.10
+     * Update:         2014.09
+     **
+    -->
+    <meta charset="utf-8" />
+    <title>
+        
+            为 Jekyll 博客添加 category 分类
+                 
+    </title>
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="" />
+    <meta name="description" content="Jelyll 搭建起来的博客系统，本身就具备了 category 的功能，为了更好地将 category 页面展示出来，我们能做到的方法有很多，例如使用插件。本文为您分享如何为你的博客添加分类。" />
+    <meta name="keywords" content="Jekyll, category, blog, 分类, plugins" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- //页面样式 -->
+    <link rel="stylesheet" href="http://localhost:4000/themes/violet/css/style.css" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="http://localhost:4000/themes/violet/images/favicon.ico" type="image/x-icon" />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body id="violet">
+    <div class="page-wrapper">
+        <section class="head" id="violet-head">
+            <header class="header" id="violet-header">
+                <h1 class="logo"><a href="http://localhost:4000">Violet</a></h1>
+                <h2 class="subtitle">Just another Jekyll blog.</h2>
+            </header>
+            <nav class="nav" id="violet-nav">
+                <ul class="nav-list">
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/index.html">
+                            首页
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/archives.html">
+                            文章归档
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/works.html">
+                            作品
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="http://www.zhanxin.info/contact.html">
+                            联系我
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="https://github.com/pizn/pizn.github.com">
+                            博客源代码
+                        </a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </section>
+        <section class="main" id="violet-main">
+            <article class="main-article main-article-page">
+    <div class="violet-title">
+        <h3 class="violet-title-item">为 Jekyll 博客添加 category 分类</h3>
+    </div>
+    <div class="violet-post">
+        <p class="main-article-meta"><time pubdate="">2012-02-23</time></p>
+        <div class="main-article-contant">
+            <p>为了深化 <strong>Jekyll</strong> 博客里面的内联关系，我们通常会对一篇文章进行分类，贴标签等，这样能做到文章的更好的区分和快速查找到相关文章。</p>
+
+<p>假如您也想在你的博客上实现这样的效果（如右图）, 请看下文。</p>
+
+<p><img src="/resources/category-list.jpg" alt="categroy list" class="img-right" /></p>
+
+<p>在某些地方，例如文章页面，你可能希望在侧边栏添加这样的功能。有一个分类目录，还能显示出分类文章的篇数。</p>
+
+<p>###一、为文章添加分类</p>
+
+<p>在编辑一篇文章的时候，我们会在文章的头部写上一些 key 值, 同样的道理，我们可以为
+这篇文章添加上 category 来分类。</p>
+<pre class="html" name="colorcode">
+---
+layout: post
+title: 为 Jekyll 博客添加 category 分类
+category: Jekyll
+---
+</pre>
+
+<p>###二、添加分类功能到你希望它出现的地方</p>
+
+<p>在这里，你只需要把下面的代码拷贝到你的博客中，就能看到你添加的文章出现的分类了。</p>
+<pre class="html" name="colorcode">
+&lt;h4&gt;Category&lt;/h4&gt;
+&lt;ul&gt;
+    //这里使用了 Jekyll 语法，会被编译，所以加多个"\"
+    {\% for category in site.categories %\}
+    &lt;li&gt;&lt;a href="/categories/{\{ category | first }\}/" title="view all
+posts"&gt;{\{ category | first }\} {\{ category | last | size }\}&lt;/a&gt;
+    &lt;/li&gt;
+    {\% endfor %\}
+&lt;/ul&gt;
+</pre>
+
+<p>###三、为博客添加 category 插件</p>
+
+<p>添加 category 插件很简单，只要在根目录下建立一个 “plugins” 文件夹，然后拷贝category_plugin.rb 文件到里面就好了。category_plugin 文件的源代码可以在<a href="https://gist.github.com/1899497" title="The gist for category plugin" target="_blank">这里</a>查看到。</p>
+
+<p>这个插件的作用有两点：</p>
+
+<ul>
+  <li>建立 categories 文件夹, 遍历所有文章的分类，再根据分类建立分类的文件夹。</li>
+  <li>为每个分类建立一个 index.html 文件, 该文件的模板来自 layouts 里面的 category_index.html，因此您需要在 layouts 里面添加符合自己博客主题的文件。</li>
+</ul>
+
+<p>###四、添加 category_index.html 模板</p>
+
+<p>这个模板是为了将我们的分类主页显示出来，显示的内容是一个分类的所有文章。也就是分
+类列表的链接地址。具体使用到的代码如下：</p>
+<pre class="html" name="colorcode">
+{\% for post in site.categories.[page.category] %\}
+    {\{ post.date }\} {\{ post.title }\}
+{\% endfor %\}
+</pre>
+
+<p>你也可以参考我的分类主页来设计自己的分类主页，具体的效果，我截个图看看。我的分类主页的源代码在<a href="https://gist.github.com/1899544" target="_blank" title="The gist for category index page">这里</a>。</p>
+
+<p><img src="/resources/category-index.jpg" alt="category index" class="img-center" /></p>
+
+<p>###五、我们写的代码最终是如何完成工作的？</p>
+
+<p>Ok, 在完成上面的步骤之后，我们需要编译一遍。在终端 cd 到你的博客目录，输入 <code class="v-code">jekyll --server</code> ，然后再回头看看我们的博客文件夹。</p>
+
+<p>在 site 文件夹下，你会发现多了一个 categories 文件，里面就有包含的所有分类文件夹。同时，你也会发现在与 categories 同级的文件下也有这些分类文件夹，但他们存放的是我们的所有分类文章。</p>
+
+<p>还有个变化，就是我们的文章链接 URL，添加了分类的文章，在日期前面会多了分类的名称。例如：pizn.me/Jekyll/2012/02/23/user-category-plugin-for-jekyll-blog.html</p>
+
+<p>###六、需要注意的，还有我疑惑的（需要大家帮忙看看的）</p>
+
+<p>因为添加了插件，所以要确保你的 config.yml 文件里面的 safe 属性值为 false，因为这
+个属性值为 true 的时候是使自定义插件失效。</p>
+
+<p>我疑惑的是，我在本地完成上面的步骤之后，分类列表的每个分类链接可以成功到达分类的详细列表页面（即 category_index.html)，然而我上传到 github，没有报错，却无法到达那个页面，显示 404 错误。求大牛帮忙解决。</p>
+
+        </div>
+    </div>
+</article>
+<nav class="pagination fn-clear" id="violet-paging">
+    <div class="pagination-list">
+        
+        <a class="prev" href="/2012/01/16/the-seo-for-jekyll-blog.html" rel="bookmark"><i class="fa fa-chevron-circle-left"></i>优化 Jekyll 站点的 SEO 技巧...</a>
+        
+        
+        <a class="next" href="/2012/03/01/some-tips-for-jekyll-blog.html" rel="bookmark">搭建 Jekyll 博客的一些小技巧<i class="fa fa-chevron-circle-right"></i></a>
+        
+    </div>
+</nav>
+<div class="comment">
+    
+        <div class="comment-cnt">
+            <div id="disqus_thread"></div>
+        </div>
+    
+</div>
+
+        </section>
+        <footer class="foot" id="violet-foot">
+            <div class="footer fn-clear">
+                <h1 class="logo">Violet</h1>
+            </div>
+            <div class="copyright">
+                <div class="copyright-cnt fn-clear">
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-google-plus"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-facebook"></i></a>
+                    
+                    <a class="follow" href="http://github.com/pizn" target="_blank"><i class="fa fa-github"></i></a>
+                    
+                    <a class="follow" href="http://weibo.com/pizner" target="_blank"><i class="fa fa-weibo"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-renren"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-pinterest"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-twitter"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-rss"></i></a>
+                    
+                    <p class="text">© 2013 Violet Jekyll Theme.Design by <a href="http://www.zhanxin.info">zhanxin.lin</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-scrollTo.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/common.js"></script>
+    <script type="text/javascript">
+        var headImgArr = [];
+        
+            headImgArr.push("/themes/violet/images/hdbg01.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg02.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg03.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg04.jpg");
+        
+        if(headImgArr.length <= 0) {
+            headImgArr = ["/themes/violet/images/hdbg03.jpg"];
+            var item = 0;
+        } else {
+            var item = Math.floor(Math.random() * (headImgArr.length));
+        }
+        $("#violet-head").css({
+            "background-image": "url(" + headImgArr[item] + ")"
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+     **
+     * Author:         掌心
+     * Contact:        zhanxin.info@gmail.com
+     * Theme Name:     Violet ( Violet 主题代表着一种颜色，一种情感，还有一种美)
+     * Create Date:    2013.10
+     * Update:         2014.09
+     **
+    -->
+    <meta charset="utf-8" />
+    <title>
+        
+            为 Jekyll 博客添加静态搜索
+                 
+    </title>
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="" />
+    <meta name="description" content="使用 Javascript 通过关键词来搜索博客中的相关文章，实现在 Jekyll 中的静态搜索。" />
+    <meta name="keywords" content="Jekyll, search, Javascript, Jquery, Jquery UI, blog, static search, xml, Ajax" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- //页面样式 -->
+    <link rel="stylesheet" href="http://localhost:4000/themes/violet/css/style.css" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="http://localhost:4000/themes/violet/images/favicon.ico" type="image/x-icon" />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body id="violet">
+    <div class="page-wrapper">
+        <section class="head" id="violet-head">
+            <header class="header" id="violet-header">
+                <h1 class="logo"><a href="http://localhost:4000">Violet</a></h1>
+                <h2 class="subtitle">Just another Jekyll blog.</h2>
+            </header>
+            <nav class="nav" id="violet-nav">
+                <ul class="nav-list">
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/index.html">
+                            首页
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/archives.html">
+                            文章归档
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/works.html">
+                            作品
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="http://www.zhanxin.info/contact.html">
+                            联系我
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="https://github.com/pizn/pizn.github.com">
+                            博客源代码
+                        </a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </section>
+        <section class="main" id="violet-main">
+            <article class="main-article main-article-page">
+    <div class="violet-title">
+        <h3 class="violet-title-item">为 Jekyll 博客添加静态搜索</h3>
+    </div>
+    <div class="violet-post">
+        <p class="main-article-meta"><time pubdate="">2012-03-04</time></p>
+        <div class="main-article-contant">
+            <p>今晚吃完饭后，为博客做了简单的搜索功能，因为做的大多是前台方面的工作，所以我个人
+将其称之为静态搜索。简单介绍下。</p>
+
+<p>###一、生成 search.xml</p>
+
+<p>遍历 <strong>Jekyll</strong> 博客中的所有文章，获取其标题、日期和文章链接，整合
+到一个 <strong>xml</strong> 文件中。这个 <strong>xml</strong> 文件我们可将其命名为<code class="v-code">search.xml</code>，以便我们后续的工作。</p>
+
+<p>具体的写法如下：</p>
+<pre class="html" name="colorcode">
+//jekyll 语法前反斜杆是为了转义输出，请去掉
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;articles&gt;
+{\% for post in site.posts %\}
+&lt;article&gt;
+    &lt;title&gt;{\{ post.title }\}&lt;/title&gt;
+    &lt;url&gt;{\{ site.url }\}{\{ post.url }\}&lt;/url&gt;
+    &lt;date&gt;{\{ post.date | date_to_utc | date: '%Y-%m-%d'}\}&lt;/date&gt;
+&lt;/article&gt;
+{\% endfor %\}
+&lt;/articles&gt;
+</pre>
+
+<p>###二、添加 DOM 结构</p>
+
+<p>DOM 结构就是 HTML 代码啦。你可以添加到你希望的地方，但要注意一点，就是你添加 DOM结构的地方要有相应的 CSS 链接和 JS 链接。我把这个简单的搜索功能放在 Archive.html里面，不清楚的同学可以去看源代码哈。</p>
+
+<p>添加 <strong>Jquery UI</strong> 样式和 <strong>JS</strong> 链接。我在这里采用的是 jquery-ui-1.8.18.custom 版本。DOM 结构保存在同一个页面。</p>
+
+<pre class="html" name="colorcode">
+//样式表
+&lt;link rel="stylesheet" href="/css/jquery-ui-1.8.18.custom.css" type="text/css"
+/&gt;
+
+//js
+&lt;script src="/js/jquery-ui-1.8.18.custom.js"&gt;&lt;/script&gt;
+
+//添加 DOM
+&lt;input id="J_search" placeholder="Simple Search"/&gt;
+</pre>
+
+<p>###三、设置全局地址</p>
+
+<p>在 <strong>Jekyll</strong> 博客的根目录下的 <code class="v-code">config.yml</code> 添加你的博客的全局基本地址。就一句话就 Ok 哈！</p>
+
+<pre class="html" name="colorcode">
+url: http://www.pizn.me
+</pre>
+
+<p>###四、通过 Javascript 实现搜索功能</p>
+
+<p>简单说明下原理：通过在输入框输入关键词，<strong>Ajax</strong> 匹配 search.xml 中的文章标题里面的词语，
+若是，在输入框下方显示出标题。通过选择标题，跳转到搜索到的文章页面。</p>
+
+<p>我的实现方式是这样的，你也可以通过修改 <code class="v-code">autocomplete</code>
+的实例来实现不同的展现效果。</p>
+<pre class="js" name="colorcode">
+$(function() {
+		$.ajax({
+            url: "search.xml",
+            dataType: "xml",
+            success: function( xmlResponse ) {
+                var data = $( "article", xmlResponse ).map(function() {
+                    return {
+                        value: $( "title", this ).text() + ", " +
+                            ( $.trim( $( "date", this ).text() ) ),
+                        desc: $("description", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+
+                $( "#J_search" ).autocomplete({
+                    source: data,
+                    minLength: 0,
+                    select: function( event, ui ) {
+                        window.location.href = ui.item.url;
+                    }
+                });
+            }
+        });
+    });
+</pre>
+
+<p>###五、测试</p>
+
+<p>在输入框中输入你所知道的一些关键词，如果输入框下拉菜单有内容，选中它，成功跳转到对应的文章页面。那么，你成功了。</p>
+
+<p>###六、总结</p>
+
+<p>这是一个很简单的实现方法，因为就今晚几个小时做出来的，所以可能还有很多不适用性。兼容性方面还没做好测试，只兼容 Firefox 和 Chrome ，还没完善的一个方面是出错处理，有空再补上。</p>
+
+<p>遗憾的是暂时只支持英文关键词搜索，后续，恩，中英文。</p>
+
+        </div>
+    </div>
+</article>
+<nav class="pagination fn-clear" id="violet-paging">
+    <div class="pagination-list">
+        
+        <a class="prev" href="/2012/03/03/vim-commonly-used-command.html" rel="bookmark"><i class="fa fa-chevron-circle-left"></i>Vim 常用命令总结</a>
+        
+        
+        <a class="next" href="/2012/03/11/use-jekyll-for-web-develop.html" rel="bookmark">使用 Jekyll 提高 Demo 开发效率...<i class="fa fa-chevron-circle-right"></i></a>
+        
+    </div>
+</nav>
+<div class="comment">
+    
+        <div class="comment-cnt">
+            <div id="disqus_thread"></div>
+        </div>
+    
+</div>
+
+        </section>
+        <footer class="foot" id="violet-foot">
+            <div class="footer fn-clear">
+                <h1 class="logo">Violet</h1>
+            </div>
+            <div class="copyright">
+                <div class="copyright-cnt fn-clear">
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-google-plus"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-facebook"></i></a>
+                    
+                    <a class="follow" href="http://github.com/pizn" target="_blank"><i class="fa fa-github"></i></a>
+                    
+                    <a class="follow" href="http://weibo.com/pizner" target="_blank"><i class="fa fa-weibo"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-renren"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-pinterest"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-twitter"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-rss"></i></a>
+                    
+                    <p class="text">© 2013 Violet Jekyll Theme.Design by <a href="http://www.zhanxin.info">zhanxin.lin</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-scrollTo.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/common.js"></script>
+    <script type="text/javascript">
+        var headImgArr = [];
+        
+            headImgArr.push("/themes/violet/images/hdbg01.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg02.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg03.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg04.jpg");
+        
+        if(headImgArr.length <= 0) {
+            headImgArr = ["/themes/violet/images/hdbg03.jpg"];
+            var item = 0;
+        } else {
+            var item = Math.floor(Math.random() * (headImgArr.length));
+        }
+        $("#violet-head").css({
+            "background-image": "url(" + headImgArr[item] + ")"
+        });
+    </script>
+    
+</body>
+</html>

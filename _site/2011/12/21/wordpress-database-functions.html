@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+     **
+     * Author:         掌心
+     * Contact:        zhanxin.info@gmail.com
+     * Theme Name:     Violet ( Violet 主题代表着一种颜色，一种情感，还有一种美)
+     * Create Date:    2013.10
+     * Update:         2014.09
+     **
+    -->
+    <meta charset="utf-8" />
+    <title>
+        
+            WordPress 数据库操作常用函数
+                 
+    </title>
+    <meta name="generator" content="Jekyll" />
+    <meta name="author" content="" />
+    <meta name="description" content="最近还在折腾 WordPress, 对一些数据库操作方面的使用，在这里总结一下。WordPress 提供了一些数据库操作上的方法，简单而且比较方便。" />
+    <meta name="keywords" content="hello, wordpress" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <!-- //页面样式 -->
+    <link rel="stylesheet" href="http://localhost:4000/themes/violet/css/style.css" type="text/css" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Spirax' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="http://localhost:4000/themes/violet/images/favicon.ico" type="image/x-icon" />
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body id="violet">
+    <div class="page-wrapper">
+        <section class="head" id="violet-head">
+            <header class="header" id="violet-header">
+                <h1 class="logo"><a href="http://localhost:4000">Violet</a></h1>
+                <h2 class="subtitle">Just another Jekyll blog.</h2>
+            </header>
+            <nav class="nav" id="violet-nav">
+                <ul class="nav-list">
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/index.html">
+                            首页
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/archives.html">
+                            文章归档
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="/works.html">
+                            作品
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="http://www.zhanxin.info/contact.html">
+                            联系我
+                        </a>
+                        
+                    </li>
+                    
+                    
+                    
+                    <li class="nav-item ">
+                        <a href="https://github.com/pizn/pizn.github.com">
+                            博客源代码
+                        </a>
+                        
+                    </li>
+                    
+                </ul>
+            </nav>
+        </section>
+        <section class="main" id="violet-main">
+            <article class="main-article main-article-page">
+    <div class="violet-title">
+        <h3 class="violet-title-item">WordPress 数据库操作常用函数</h3>
+    </div>
+    <div class="violet-post">
+        <p class="main-article-meta"><time pubdate="">2011-12-21</time></p>
+        <div class="main-article-contant">
+            <p>最近还在折腾 WordPress, 对一些数据库操作方面的使用，在这里总结一下。WordPress 提
+供了一些数据库操作上的方法，简单而且比较方便。</p>
+
+<p>你可以在 /wp-includes/wp-db.php 里面找到这些方法的使用和文档。在这里就将一些比较
+常用的写出来。哈，因为这几天使用到，方便以后查阅。</p>
+
+<p>###常用的 WordPress 数据库操作函数</p>
+
+<ul>
+  <li>insert($table, $data, $format) – 通过数组，将数据插入到表的一行中</li>
+  <li>update($table, $data, $where, $format, $where_format) – 通过数据，更新表中的一行</li>
+  <li>get_var($query, $x, $y) – 在数据库中检索单个变量</li>
+  <li>query($query) – 执行数据库查询</li>
+  <li>get_results($query, $output) – 检索数据库中的一个或多个行，返回结果</li>
+</ul>
+
+<p>###常用的 WordPress 数据库操作方法</p>
+
+<ul>
+  <li>set_prefix($prefix) – 用来设置表前缀</li>
+  <li>prepare($query) – 准备一个这行的 sql 语句</li>
+  <li>get_row($query, $output, $y) – 获取一行的内容</li>
+  <li>get_col($query, $x) – 获取一列的内容</li>
+</ul>
+
+<p>###使用示例</p>
+<pre class="js" name="colorcode">
+/**
+ * insert
+ */
+$wpdb-&gt;insert( $wpdb-&gt;posts, array('post_title' =&gt; $title ) );
+/**
+ * update
+ */
+$wpdb-&gt;update( $wpdb-&gt;posts, array('post_title' =&gt; $title ), array( 'ID' =&gt; $id) );
+/**
+ * query
+ */
+$wpdb-&gt;query( "DELETE FORM $wpdb-&gt;options WHERE option_name = '$name'" );
+</pre>
+
+        </div>
+    </div>
+</article>
+<nav class="pagination fn-clear" id="violet-paging">
+    <div class="pagination-list">
+        
+        <a class="prev" href="/2011/12/05/wordpress-meta.html" rel="bookmark"><i class="fa fa-chevron-circle-left"></i>Wordpress Custom Fileds</a>
+        
+        
+        <a class="next" href="/2012/01/09/violet-is-comming.html" rel="bookmark">Violet 2.0 开始在 PIZn.Me 实践...<i class="fa fa-chevron-circle-right"></i></a>
+        
+    </div>
+</nav>
+<div class="comment">
+    
+        <div class="comment-cnt">
+            <div id="disqus_thread"></div>
+        </div>
+    
+</div>
+
+        </section>
+        <footer class="foot" id="violet-foot">
+            <div class="footer fn-clear">
+                <h1 class="logo">Violet</h1>
+            </div>
+            <div class="copyright">
+                <div class="copyright-cnt fn-clear">
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-google-plus"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-facebook"></i></a>
+                    
+                    <a class="follow" href="http://github.com/pizn" target="_blank"><i class="fa fa-github"></i></a>
+                    
+                    <a class="follow" href="http://weibo.com/pizner" target="_blank"><i class="fa fa-weibo"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-renren"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-pinterest"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-twitter"></i></a>
+                    
+                    <a class="follow" href="http://www.zhanxin.info" target="_blank"><i class="fa fa-rss"></i></a>
+                    
+                    <p class="text">© 2013 Violet Jekyll Theme.Design by <a href="http://www.zhanxin.info">zhanxin.lin</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-1.8.3.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/jquery-scrollTo.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/themes/violet/js/common.js"></script>
+    <script type="text/javascript">
+        var headImgArr = [];
+        
+            headImgArr.push("/themes/violet/images/hdbg01.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg02.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg03.jpg");
+        
+            headImgArr.push("/themes/violet/images/hdbg04.jpg");
+        
+        if(headImgArr.length <= 0) {
+            headImgArr = ["/themes/violet/images/hdbg03.jpg"];
+            var item = 0;
+        } else {
+            var item = Math.floor(Math.random() * (headImgArr.length));
+        }
+        $("#violet-head").css({
+            "background-image": "url(" + headImgArr[item] + ")"
+        });
+    </script>
+    
+</body>
+</html>
