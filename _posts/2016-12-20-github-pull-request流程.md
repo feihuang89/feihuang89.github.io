@@ -1,8 +1,9 @@
 ---
 layout: post
 title: github pull request流程
-date: 2016年12月20日下午7:05
+date: 2016-12-20 19:20:00.000000000 +09:00
 ---
+
 #### github pull request流程
 1.fork别人在github上面的远程仓库，相当于拷贝，不影响原仓库
 
