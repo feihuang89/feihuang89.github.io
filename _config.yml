@@ -17,12 +17,12 @@ cover_color:
 
 # The blog button should not be removed.
 blog_button:
-    title: Blog
+    title: 博客
     description: Visit blog
 
 # Navigation buttons in the front page.
 nav:
-    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    - {title: 简书, description: 我的简书, url: 'http://www.jianshu.com/users/a6f0774113f0/timeline'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
 # Pagination
