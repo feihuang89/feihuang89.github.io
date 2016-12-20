@@ -1,102 +1,49 @@
-# Where things are
-source:       .
-destination:  ./_site
-plugins:      ./_plugins
-layouts:      ./_layouts
-paginate:     8
-
-# Handling Reading
-safe:         false
-include:      [".htaccess"]
-exclude:      []
-keep_files:   [".git", ".svn"]
-encoding:     "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-textile_ext:  "textile"
-
-# Filtering Content
-show_drafts:  null
-limit_posts:  0
-future:       true
-unpublished:  false
-
-# Conversion
-markdown:     kramdown
-highlighter:  pygments
-lsi:          false
-excerpt_separator: "\n\n"
-
-# Serving
-detach:       false
-port:         4000
-host:         127.0.0.1
-baseurl:      "" # does not include hostname
-
-# Outputting
-permalink:     date
-paginate_path: /page:num
-timezone:      null
-
-
-#站点基础配置
+# Basic
 title: 菲皇
-subTitle: What doesn't kill you makes you stronger!
-description: 这是 PIZn 的又一个博客，它是基于 Jekyll 搭建起来的。在这里，不仅仅是用来快速记录工作，学习，生活的一点一滴的地方，更是 PIZn 对 Jekyll 的学习和使用的一次有意义的实践。
-url: https://feihuang89.github.io/
-feed: /atom.xml
+subtitle: What doesn't kill you only makes you stronger!
+welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+description: 博客主题源于@喵神，用于记录本猿的工作、学习以及生活感悟！.
+creator: <a href="feihuang.online">菲皇</a>
 
-#菜单配置
+url: "feihuang.online"
+
+permalink: /:year/:month/:title/
+
+# Format
+highlighter: plain
+
+# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
+cover_color: red
+
+# The blog button should not be removed.
+blog_button:
+    title: Blog
+    description: Visit blog
+
+# Navigation buttons in the front page.
 nav:
-  - text: 首页
-    url: /index.html
-  - text: 文章归档
-    url: /archives.html
-  - text: 作品
-    url: /works.html
-  - text: 联系我
-    url: http://www.zhanxin.info/contact.html
-  # - text: 博客源代码
-  #   url: https://github.com/pizn/pizn.github.com
+    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    # - {title: Another Button, description: A button, url: 'http://example.com'}
 
-#theme config
-themes: /themes/violet
+# Pagination
+gems: [jekyll-paginate]
+paginate: 10
+paginate_path: "page/:num/"
 
-#配置你喜欢的顶部背景图片
-headimg:
-  - item: /themes/violet/images/hdbg01.jpg
-  - item: /themes/violet/images/hdbg02.jpg
-  - item: /themes/violet/images/hdbg03.jpg
-  - item: /themes/violet/images/hdbg04.jpg
+# Comment
+comment:
+    disqus: vno-jekyll
+    # duoshuo: 
+    
+# Social
+social:
+    weibo: feihuang89
+    github: feihuang89
+    # twitter: onevcat
+    # gplus: 107108267983477358170
+    mail: 782309475@qq.com
 
-#关注我
-follow:
-  - class: fa-google-plus
-    url: http://www.zhanxin.info
-  - class: fa-facebook
-    url: http://www.zhanxin.info
-  - class: fa-github
-    url: http://github.com/pizn
-  - class: fa-weibo
-    url: http://weibo.com/pizner
-  - class: fa-renren
-    url: http://www.zhanxin.info
-  - class: fa-pinterest
-    url: http://www.zhanxin.info
-  - class: fa-twitter
-    url: http://www.zhanxin.info
-  - class: fa-rss
-    url: http://www.zhanxin.info
-
-#作者信息
-author:
-  link: http://www.zhanxin.info/contact.html
-  img: http://tp2.sinaimg.cn/1832671293/180/40020872447/1
-
-#评论信息
-disqus:
-  config: true
-  id: piznblog
-
-duoshuo:
-  config: false
-  id: zhanxin
+# Google Analytics
+ga:
+    # id: your_ga_id
+    # host: your_host
