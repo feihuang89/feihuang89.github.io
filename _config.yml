@@ -9,6 +9,8 @@ url: "feihuang.online"
 
 permalink: /:year/:month/:title/
 
+logo: /assets/images/avatar.jpg
+
 # Format
 highlighter: rouge
 
